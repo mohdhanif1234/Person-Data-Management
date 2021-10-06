@@ -8,7 +8,7 @@ namespace PersonDataManagement
 {
     class Program
     {
-        // UC-6: Skip records from the list whose age is less than 60 years
+        // UC-7: Removing specific name from the list
         static void Main(string[] args)
         {
             List<Person> list = new List<Person>();
@@ -16,10 +16,11 @@ namespace PersonDataManagement
             //RetrieveTop2Records(list);
             //RetrieveTeenageAgeRecords(list);
             //FindoutAverageage(list);
-            //Console.Write("Enter the name of the person you want to search the details of in the list: ");
-            //string name = Console.ReadLine();
+            Console.Write("Enter the name of the person you want to remove from the list: ");
+            string name = Console.ReadLine();
             //SearchName(list, name);
-            RetrieveRecordsAgeabove60(list);
+            //RetrieveRecordsAgeabove60(list);
+            RemovePerson(list, name);
             Console.ReadLine();
         }
         
@@ -80,12 +81,12 @@ namespace PersonDataManagement
                 var personObj = list.Find(p => p.Name == name);
                 if (personObj != null)
                 {
-                    Console.WriteLine("Present" + "\n\n" + "Name: " + personObj.Name + "\n\n" + "SSN: " + personObj.SSN + "\n");
+                    Console.WriteLine(name + " is present in the list" + "\n");
                     return personObj;
                 }
                 else
                 {
-                    Console.WriteLine("Not present");
+                    Console.WriteLine(name + " is not present in the list");
                     return null;
                 }
             }
@@ -103,6 +104,23 @@ namespace PersonDataManagement
             Console.WriteLine("");
             List<Person> result = list.FindAll(p => p.Age > 60).Skip(0).ToList();
             IterateOverLoop(result);
+        }
+
+        // Removing a specific person details from the list
+        public static void RemovePerson(List<Person> list, string name)
+        {
+            Person result = SearchName(list, name);
+            if (result != null)
+            {
+                list.Remove(result);
+                Console.WriteLine("The new list after removing "+ name + "'s" +" details is" + "\n");
+                IterateOverLoop(list);
+            }
+            else
+            {
+                Console.WriteLine("");
+                IterateOverLoop(list);
+            }
         }
     }
 }
