@@ -8,12 +8,13 @@ namespace PersonDataManagement
 {
     class Program
     {
-        // UC-2: Retrieving top 2 records from the list whose age is less than 60 years
+        // UC-3: Retrieving all the records from the list with age between 13 and 18 years
         static void Main(string[] args)
         {
             List<Person> list = new List<Person>();
             AddPersonDetails(list); // Calling method to add person details
-            RetrieveTop2Records(list);
+            //RetrieveTop2Records(list);
+            RetrieveTeenageAgeRecords(list);
             Console.ReadLine();
         }
         
@@ -44,6 +45,15 @@ namespace PersonDataManagement
             Console.WriteLine("Retrieving top 2 records from the list whose age is less than 60 years");
             Console.WriteLine("");
             List<Person> result = list.FindAll(person => person.Age < 60).OrderBy(s => s.Age).Take(2).ToList();
+            IterateOverLoop(result);
+        }
+
+        // Retrieving teenage age records from the list whose age is between 13 and 18 years
+        public static void RetrieveTeenageAgeRecords(List<Person> list)
+        {
+            Console.WriteLine("Retrieving teenage age records between 13 and 18 years");
+            Console.WriteLine("");
+            List<Person> result = list.FindAll(p => p.Age >= 13 && p.Age <= 18).ToList();
             IterateOverLoop(result);
         }
     }
