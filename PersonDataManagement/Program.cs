@@ -8,14 +8,17 @@ namespace PersonDataManagement
 {
     class Program
     {
-        // UC-4: Retrieving average age from the list
+        // UC-5: Checking for a specific name present in the list or not
         static void Main(string[] args)
         {
             List<Person> list = new List<Person>();
             AddPersonDetails(list); // Calling method to add person details
             //RetrieveTop2Records(list);
             //RetrieveTeenageAgeRecords(list);
-            FindoutAverageage(list);
+            //FindoutAverageage(list);
+            Console.Write("Enter the name of the person you want to search the details of in the list: ");
+            string name = Console.ReadLine();
+            SearchName(list, name);
             Console.ReadLine();
         }
         
@@ -58,12 +61,38 @@ namespace PersonDataManagement
             IterateOverLoop(result);
         }
 
-        // Rerieving average age from the list
+        // Retrieving average age from the list
         public static void FindoutAverageage(List<Person> list)
         {
             Console.WriteLine("Retrieving average age");
             var result = list.Average<Person>(p => p.Age);
             Console.WriteLine("Average age = " + result + " years");
+        }
+
+        // Checking whether a specific name is present in the list or not
+
+        public static Person SearchName(List<Person> list, string name)
+        {
+            try
+            {
+                Console.WriteLine();
+                var personObj = list.Find(p => p.Name == name);
+                if (personObj != null)
+                {
+                    Console.WriteLine("Present" + "\n\n" + "Name: " + personObj.Name + "\n\n" + "SSN: " + personObj.SSN + "\n");
+                    return personObj;
+                }
+                else
+                {
+                    Console.WriteLine("Not present");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
     }
 }
