@@ -8,11 +8,12 @@ namespace PersonDataManagement
 {
     class Program
     {
-        // UC-1: Creating a person list which contains basic details like SSN, name, address and age
+        // UC-2: Retrieving top 2 records from the list whose age is less than 60 years
         static void Main(string[] args)
         {
             List<Person> list = new List<Person>();
             AddPersonDetails(list); // Calling method to add person details
+            RetrieveTop2Records(list);
             Console.ReadLine();
         }
         
@@ -34,6 +35,16 @@ namespace PersonDataManagement
             {
                 Console.WriteLine("SSN={0}\tName={1}\tAddress={2}\tAge={3}", person.SSN, person.Name, person.Address, person.Age);
             }
+            Console.WriteLine("");
+        }
+
+        // Retrieving top 2 records from the list whose age is less than 60 years
+        public static void RetrieveTop2Records(List<Person> list)
+        {
+            Console.WriteLine("Retrieving top 2 records from the list whose age is less than 60 years");
+            Console.WriteLine("");
+            List<Person> result = list.FindAll(person => person.Age < 60).OrderBy(s => s.Age).Take(2).ToList();
+            IterateOverLoop(result);
         }
     }
 }
