@@ -8,7 +8,7 @@ namespace PersonDataManagement
 {
     class Program
     {
-        // UC-5: Checking for a specific name present in the list or not
+        // UC-6: Skip records from the list whose age is less than 60 years
         static void Main(string[] args)
         {
             List<Person> list = new List<Person>();
@@ -16,9 +16,10 @@ namespace PersonDataManagement
             //RetrieveTop2Records(list);
             //RetrieveTeenageAgeRecords(list);
             //FindoutAverageage(list);
-            Console.Write("Enter the name of the person you want to search the details of in the list: ");
-            string name = Console.ReadLine();
-            SearchName(list, name);
+            //Console.Write("Enter the name of the person you want to search the details of in the list: ");
+            //string name = Console.ReadLine();
+            //SearchName(list, name);
+            RetrieveRecordsAgeabove60(list);
             Console.ReadLine();
         }
         
@@ -93,6 +94,15 @@ namespace PersonDataManagement
                 Console.WriteLine(ex.Message);
                 return null;
             }
+        }
+
+        // Skipping the age from the list less than 60 years
+        public static void RetrieveRecordsAgeabove60(List<Person> list)
+        {
+            Console.WriteLine("Displaying age above 60 years");
+            Console.WriteLine("");
+            List<Person> result = list.FindAll(p => p.Age > 60).Skip(0).ToList();
+            IterateOverLoop(result);
         }
     }
 }
