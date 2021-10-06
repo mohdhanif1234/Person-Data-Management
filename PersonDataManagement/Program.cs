@@ -8,13 +8,14 @@ namespace PersonDataManagement
 {
     class Program
     {
-        // UC-3: Retrieving all the records from the list with age between 13 and 18 years
+        // UC-4: Retrieving average age from the list
         static void Main(string[] args)
         {
             List<Person> list = new List<Person>();
             AddPersonDetails(list); // Calling method to add person details
             //RetrieveTop2Records(list);
-            RetrieveTeenageAgeRecords(list);
+            //RetrieveTeenageAgeRecords(list);
+            FindoutAverageage(list);
             Console.ReadLine();
         }
         
@@ -55,6 +56,14 @@ namespace PersonDataManagement
             Console.WriteLine("");
             List<Person> result = list.FindAll(p => p.Age >= 13 && p.Age <= 18).ToList();
             IterateOverLoop(result);
+        }
+
+        // Rerieving average age from the list
+        public static void FindoutAverageage(List<Person> list)
+        {
+            Console.WriteLine("Retrieving average age");
+            var result = list.Average<Person>(p => p.Age);
+            Console.WriteLine("Average age = " + result + " years");
         }
     }
 }
